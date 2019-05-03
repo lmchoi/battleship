@@ -6,11 +6,20 @@ func TestPlaceShip(t *testing.T) {
 	for _, tc := range testCases {
 		expected := tc.ship
 		board := newBoard(defaultBoardSize)
-		board.placePiece(tc.grid, tc.ship, tc.horizontal)
-		for _, expectedGrids := range tc.grids {
+		board.placePiece(tc.pos, tc.ship, tc.horizontal)
+		for _, expectedGrids := range tc.expectedPos {
 			if observed := board.get(expectedGrids); observed != expected {
 				t.Fatalf("%v : %v, want %v", tc.description, observed, expected)
 			}
+		}
+	}
+}
+
+func TestPlaceShipBoundary(t *testing.T) {
+	for _, tc := range boundaryCases {
+		board := newBoard(defaultBoardSize)
+		if observed := board.placePiece(tc.pos, tc.ship, tc.horizontal); observed != tc.expected {
+			t.Fatalf("%v : %v, want %v", tc.description, observed, tc.expected)
 		}
 	}
 }

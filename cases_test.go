@@ -2,10 +2,10 @@ package battleship_go
 
 var testCases = []struct {
 	description string
-	grid        *Position
+	pos         *Position
 	ship        *Ship
 	horizontal  bool
-	grids       []*Position
+	expectedPos []*Position
 }{
 	{
 		"place ship of size 1 horizontally",
@@ -27,6 +27,43 @@ var testCases = []struct {
 		newShip(2),
 		false,
 		[]*Position{newPosition(0, 0), newPosition(0, 1)},
+	},
+}
+
+var boundaryCases = []struct {
+	description string
+	pos         *Position
+	horizontal  bool
+	ship        *Ship
+	expected    bool
+}{
+	{
+		"place ship of length 2 horizontally at (8, 0) is ok",
+		newPosition(8, 0),
+		true,
+		newShip(2),
+		true,
+	},
+	{
+		"ship of length 2 horizontally at (9, 0) is not ok",
+		newPosition(9, 0),
+		true,
+		newShip(2),
+		false,
+	},
+	{
+		"place ship of length 2 vertically at (0, 8) is ok",
+		newPosition(0, 8),
+		false,
+		newShip(2),
+		true,
+	},
+	{
+		"ship of length 2 vertically at (0, 9) is not ok",
+		newPosition(0, 9),
+		false,
+		newShip(2),
+		false,
 	},
 }
 

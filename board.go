@@ -12,7 +12,17 @@ func newBoard(size int) *Board {
 	return board
 }
 
-func (board *Board) placePiece(startingPos *Position, ship *Ship, horizontal bool) {
+func (board *Board) placePiece(startingPos *Position, ship *Ship, horizontal bool) bool {
+	if horizontal {
+		if (startingPos.x + ship.size) > board.size {
+			return false
+		}
+	} else {
+		if (startingPos.y + ship.size) > board.size {
+			return false
+		}
+	}
+
 	if board.canPlace(startingPos, ship, horizontal) {
 		pos := newPosition(startingPos.x, startingPos.y)
 		if horizontal {
@@ -26,7 +36,11 @@ func (board *Board) placePiece(startingPos *Position, ship *Ship, horizontal boo
 				board.set(pos, ship)
 			}
 		}
+
+		return true
 	}
+
+	return false
 }
 
 func (board *Board) canPlace(startingPos *Position, ship *Ship, horizontal bool) bool {
