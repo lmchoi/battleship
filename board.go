@@ -27,16 +27,15 @@ func (board *Board) placePiece(startingPos *Position, ship *Ship, horizontal boo
 		pos := newPosition(startingPos.x, startingPos.y)
 		if horizontal {
 			for i := 0; i < ship.size; i++ {
-				pos.x += i
 				board.set(pos, ship)
+				pos.x++
 			}
 		} else {
 			for i := 0; i < ship.size; i++ {
-				pos.y += i
 				board.set(pos, ship)
+				pos.y++
 			}
 		}
-
 		return true
 	}
 
@@ -47,17 +46,17 @@ func (board *Board) canPlace(startingPos *Position, ship *Ship, horizontal bool)
 	pos := newPosition(startingPos.x, startingPos.y)
 	if horizontal {
 		for i := 0; i < ship.size; i++ {
-			pos.x += i
 			if board.get(pos) != nil {
 				return false
 			}
+			pos.x++
 		}
 	} else {
 		for i := 0; i < ship.size; i++ {
-			pos.y += i
 			if board.get(pos) != nil {
 				return false
 			}
+			pos.y++
 		}
 	}
 
