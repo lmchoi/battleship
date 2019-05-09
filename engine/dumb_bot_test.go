@@ -1,9 +1,11 @@
-package battleship_go
+package engine
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestDumbBot(t *testing.T) {
-	game := newGame()
+	game := NewGame()
 	bot := newDumbBot(game)
 	println("Before: ")
 	bot.board.print()

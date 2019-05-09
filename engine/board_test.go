@@ -1,6 +1,8 @@
-package battleship_go
+package engine
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestPlaceShip(t *testing.T) {
 	for _, tc := range testCases {

@@ -1,4 +1,4 @@
-package battleship_go
+package engine
 
 var testCases = []struct {
 	description string

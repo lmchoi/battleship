@@ -1,4 +1,4 @@
-package battleship_go
+package engine
 
 type ShipType struct {
 	name   string

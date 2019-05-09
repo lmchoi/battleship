@@ -1,4 +1,4 @@
-package battleship_go
+package engine
 
 const defaultBoardSize = 10 // 10 x 10
 
@@ -9,7 +9,7 @@ type Game struct {
 	ships      []Ship
 }
 
-func newGame() *Game {
+func NewGame() *Game {
 	game := new(Game)
 	game.boardSize = defaultBoardSize
 	game.shipCounts = map[ShipType]int{
@@ -30,6 +30,8 @@ func newGame() *Game {
 		}
 	}
 
+	// TODO  part of setup?
+	game.addBot()
 	return game
 }
 
@@ -37,6 +39,23 @@ func (game *Game) addBot() {
 	game.bot = newDumbBot(game)
 }
 
-func (game *Game) start() {
+func (game *Game) Start() {
 	game.bot.placeShips()
+
+	game.ShowPlayersBoard()
+
+	// turn start -> prompt player to guess
+	// update status
+	// show results -> end game?
+	// next round
+	//
+
+	// show winner
+
+	//game.addBot()
+}
+
+func (game *Game) ShowPlayersBoard() {
+	// TODO for now show bot's board
+	game.bot.board.print()
 }
